@@ -12,12 +12,22 @@ def get_parent_dir(n=1):
         current_path = os.path.dirname(current_path)
     return current_path
 
-number = 0
+
 # initialising directories
 detection_folder = os.path.join(get_parent_dir(1), "1_Detection")
 camera_inputs = os.path.join(detection_folder, "Camera_Inputs")
 annotated_images = os.path.join(detection_folder, "Annotated_Images")
 trained_yolo = os.path.join(get_parent_dir(1), "Trained_YOLO")
+
+# initialising any variables
+number = 0
+general_coordinates = []
+repeated_coordinates = []
+dice_amount = [-1]
+dice_amount_1 = 0
+dice_amount_2 = 0
+dice_iteration = 0
+
 
 # Load Yolo
 weights = os.path.join(trained_yolo, "yolov4-custom.weights")
@@ -28,7 +38,7 @@ net = cv2.dnn.readNet(weights, cfg)
 # labels = []
 # with open(data_classes, "r") as f:
 #     labels = [line.strip() for line in f.readlines()]
-labels = "Dice"
+labels = ["Dice", "Dice Face"]
 layer_names = net.getLayerNames()
 output_layers = [layer_names[i[0] - 1] for i in net.getUnconnectedOutLayers()]
 colors = np.random.uniform(0, 255, size=(len(labels), 3))
@@ -68,10 +78,12 @@ while True:
                 # Rectangle coordinates
                 x = int(center_x - w / 2)
                 y = int(center_y - h / 2)
-                boxes.append([x, y, w, h])
+                boxes.append([x, y, w, h, center_x, center_y])
                 confidences.append(float(confidence))
                 class_ids.append(class_id)
+                # general_coordinates.append([x, y, center_x, center_y])
 
+    # print(general_coordinates)
     # print(x)
     # print(y)
     # print(w)
@@ -80,24 +92,68 @@ while True:
     font = cv2.FONT_HERSHEY_SIMPLEX
     for i in range(len(boxes)):
         if i in indexes:
-            x, y, w, h = boxes[i]
-            # label = str(labels[class_ids[i]])
-            label = labels
-            color = (0,0,0)
-            # color = colors[i]
+            dice_amount_1 = dice_amount_1 + 1
+
+            x, y, w, h, center_x, center_y = boxes[i]
+            label = str(labels[class_ids[i]])
+            # label = labels
+            general_coordinates.append([center_x, center_y])
+            repeat = 0
+
+            # if (abs(center_x - general_coordinates[i][0]))/general_coordinates[i][0] > 0.2:
+
+                # color = (0,0,0)
+                # color = colors[i]
+            if label == "Dice":
+                color = (255, 0, 0)
+            else:
+                color = (0, 255, 0)
+
             cv2.rectangle(img, (x, y), (x + w, y + h), color, 2)
-            cv2.rectangle(img, (x, y), (x + 50*len(label), y-30), color, -1)
-            cv2.putText(img, label +",{:.2f}".format(confidences[i]), (x, y-5), font, 1, (255,255,255), 2)
+            cv2.rectangle(img, (x, y), (x + 50 * len(label), y - 30), color, -1)
+            cv2.putText(img, label + ",{:.2f}".format(confidences[i]), (x, y - 5), font, 1, (255, 255, 255), 2)
             print(label + ": {:.2f}".format(confidences[i]))
             number = number + 1
             outfile = os.path.join(camera_inputs, 'dice_%s.jpg' % str(number))
             cv2.imwrite(outfile, img)
 
+            if label == "Dice":
+                dice_iteration = dice_iteration + 1
+                # print("im here")
+                output_file = os.path.join(annotated_images, "dice_%s.jpg" % str(dice_iteration))
+                image = webcam.read()
+                crop_img = image[y:y + h, x:x + w]
+                cv2.imwrite(output_file, crop_img)
 
-    folder = "output_images"
+                # cv2.imshow("crop", crop_img)
+            # else:
+            # if [center_x, center_y] != repeated_coordinates:
+            #
+            # else:
+            #     repeated_coordinates.append([center_x, center_y])
+
+    try:
+        dice_amount.index(dice_amount_1)
+        break
+    except BaseException:
+        for i in range(len(boxes)):
+            if i in indexes:
+                x, y, w, h, center_x, center_y = boxes[i]
+                if label == "Dice":
+                    dice_iteration = dice_iteration + 1
+                    # print("im here")
+                    output_file = os.path.join(annotated_images, "dice_%s.jpg" % str(dice_iteration))
+                    image = webcam.read()
+                    crop_img = image[y:y + h, x:x + w]
+                    cv2.imwrite(output_file, crop_img)
+
+    dice_amount.append(dice_amount_1)
+
+
+    # folder = "output_images"
     # if cv2.waitKey(1) & 0xFF == ord('p'):
 
-
+    print(general_coordinates)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         webcam.release()
         cv2.destroyAllWindows()

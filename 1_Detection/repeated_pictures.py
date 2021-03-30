@@ -45,7 +45,7 @@ while True:
     time.sleep(0.5)
 
     # if variable == 1:
-        _, img = webcam.read()
+        net, img = webcam.read()
         height, width, channels = img.shape
 
         # detect objects
@@ -89,7 +89,7 @@ while True:
 
         cv2.imshow('image', img)
 
+
     if cv2.waitKey(1) & 0xFF == ord('q'):
         webcam.release()
         cv2.destroyAllWindows()
-        break
