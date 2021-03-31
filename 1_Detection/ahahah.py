@@ -1,5 +1,2 @@
-dice_amount = []
-dice_amount.append(0)
-print(dice_amount)
-dice_amount.append(5)
-print(dice_amount)
+dice = [3,4,5,6]
+print(len(dice))

@@ -26,7 +26,7 @@ number = 0
 
 while True:
     # Load YOLO
-    weights = os.path.join(trained_yolo, "yolov3.weights")
+    weights = os.path.join(trained_yolo, "yolov4.weights")
     cfg = os.path.join(trained_yolo, "yolov3.cfg")
     net = cv2.dnn.readNet(weights, cfg)
     data_classes = os.path.join(trained_yolo, "data_classes.txt")
