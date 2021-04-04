@@ -2,9 +2,17 @@
  Version 1.0
 
  This repo contains the code required to run a dice recognition software and also train the machine learning algorithms.
+
  2 YOLO (You Only Look Once) algorithms were trained based on Darknet:
+
     1. To detect the number of dice (mAP 91.77%)
-    2. To detect the dice value (mAP 85.81% distributed between classes as: One-17.95%, Two-98.65%, Three-100%, Four-98.25%, Five-100%, Six-100%)
+    2. To detect the dice value (mAP 85.81% distributed between classes as: 
+        One-17.95%, 
+        Two-98.65%, 
+        Three-100%, 
+        Four-98.25%, 
+        Five-100%, 
+        Six-100%)
 
  The first algorithm is used to verify that all the dice values (in the second algorithm) have been detected. 
 
