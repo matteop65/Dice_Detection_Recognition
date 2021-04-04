@@ -3,7 +3,6 @@ import cv2
 import time
 import numpy as np
 
-
 # main direction (program)
 def get_parent_dir(n=1):
     """returns the n-th parent directory of the current
@@ -16,8 +15,12 @@ def get_parent_dir(n=1):
 
 # initialising directories
 detection_folder = os.path.join(get_parent_dir(1), "1_Detection")
+data = os.path.join(get_parent_dir(1), "Data")
+training_images = os.path.join(data, "Training_Images")
+source_images = os.path.join(data, "Source_Images")
+
 camera_inputs = os.path.join(detection_folder, "Camera_Inputs")
-annotated_images = os.path.join(detection_folder, "Annotated_Images")
+annotated_images = os.path.join(data, "Annotated_Images")
 temporary_images = os.path.join(detection_folder, "Temporary_Images")
 trained_yolo = os.path.join(get_parent_dir(1), "Trained_YOLO")
 
@@ -143,7 +146,7 @@ while done:
                 image = cv2.imread(os.path.join(temporary_images, "temporary.jpg"))
 
                 dice_number = dice_number + 1
-                output_file = os.path.join(annotated_images, "dice_%s.jpg" % str(dice_number))
+                output_file = os.path.join(data, "Source_Images", "Annotated_Images", "dice_%s.jpg" % str(dice_number))
                 # image = cv2.imread(os.path.join(temporary_images, "temporary.jpg"))
                 crop_img = image[y:y+h, x:x+w]
                 cv2.imwrite(output_file, crop_img)

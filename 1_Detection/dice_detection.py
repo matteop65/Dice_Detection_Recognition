@@ -30,7 +30,7 @@ dice_iteration = 0
 
 
 # Load Yolo
-weights = os.path.join(trained_yolo, "yolov4-custom.weights")
+weights = os.path.join(trained_yolo, "yolov4-custom_best.weights")
 cfg = os.path.join(trained_yolo, "custom-yolov4-detector.cfg")
 net = cv2.dnn.readNet(weights, cfg)
 # data_classes = os.path.join(trained_yolo, "coco.names")
@@ -38,7 +38,7 @@ net = cv2.dnn.readNet(weights, cfg)
 # labels = []
 # with open(data_classes, "r") as f:
 #     labels = [line.strip() for line in f.readlines()]
-labels = ["Dice", "Dice Face"]
+labels = ["One", "Two", "Three", "Four", "Five"]
 layer_names = net.getLayerNames()
 output_layers = [layer_names[i[0] - 1] for i in net.getUnconnectedOutLayers()]
 colors = np.random.uniform(0, 255, size=(len(labels), 3))
