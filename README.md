@@ -17,6 +17,7 @@
  The first algorithm is used to verify that all the dice values (in the second algorithm) have been detected. 
 
  The current version only works with:
+ 
     - 6 sided dice
     - pins as numerical values
     - primarily wood backgrounds
