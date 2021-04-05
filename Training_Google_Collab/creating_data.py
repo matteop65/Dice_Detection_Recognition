@@ -1,6 +1,15 @@
+# This code is useful to taking pictures with a camera.
+# you can point the camera at the image you want to take and then press p to take the picture
+# the picture is saved in any file you want, but you have to specify it
+# If you want to train the algorithm, then save in train and valid directories
+# make sure you change the name, as to not overwrite what is already there.
+
+# Generally about 80% of images go into train and 20% into valid.
+# Try to get about 50 images per class, this will help keep the accuracy high
+
 import cv2
 import os
-import numpy as np
+
 
 # main direction (program)
 def get_parent_dir(n=1):
@@ -19,6 +28,7 @@ annotated_images = os.path.join(detection_folder, "Annotated_Images")
 trained_yolo = os.path.join(get_parent_dir(1), "Trained_YOLO")
 train = os.path.join(get_parent_dir(1), "Data", "Training_Images", "Train")
 valid = os.path.join(get_parent_dir(1), "Data", "Training_Images", "Valid")
+
 # initialising camera
 vid = cv2.VideoCapture(0)
 
@@ -26,30 +36,16 @@ vid = cv2.VideoCapture(0)
 number = 0
 
 while True:
-    # Load YOLO
-    # weights = os.path.join(trained_yolo, "yolov4-custom.weights")
-    # cfg = os.path.join(trained_yolo, "custom-yolov4-detector.cfg")
-    # net = cv2.dnn.readNet(weights, cfg)
-    # data_classes = os.path.join(trained_yolo, "data_classes.txt")
-    # # just for COCO with darknet do this.
-    # # Otherwise make use of a txt file and set the labels equal to that.
-    # with open(data_classes, "r") as f:
-    #     labels = [line.strp() for line in f.readlines()]
-    # layer_names = net.getLayerNames()
-    # output_layers = [layer_names[i[0]-1] for i in net.getUnconnectedOutLayers()]
-    # colors = np.random.uniform(0,255, size=(len(labels),3))
-
     # Load Images
-
     ret, frame = vid.read()
     cv2.imshow('frame', frame)
 
-    # obj_detected = 0;
-    # saves image to file when you press p
-    # idea being if object detected, then take picture
     if cv2.waitKey(1) & 0xFF == ord('p'):
         number = number + 1
-        outfile = os.path.join(valid, 'valid_%s.jpg' % str(number))
+        # below is the output file,
+        # valid is the directory, can change this to train if that's the aim.
+        # make sure you change the name to that specific image dataset, e.g.: D6_One_WhiteBackground.jpg
+        outfile = os.path.join(valid, 'picture_%s.jpg' % str(number))
         cv2.imwrite(outfile, frame)
 
     # closes file
