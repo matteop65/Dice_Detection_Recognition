@@ -7,7 +7,7 @@ import time
 main_directory = os.path.dirname(os.path.realpath(__file__))
 dice_value_main = os.path.join(main_directory, "2_Dice_Value")
 trained_yolo = os.path.join(main_directory, "Trained_YOLO")
-dice_value_weights_cfg = os.path.join(trained_yolo, "Dice_Value")
+value_dir = os.path.join(trained_yolo, "Dice_Value")
 images = os.path.join(main_directory, "Data", "Source_Images", "Annotated_Images")
 valid_images = os.path.join(main_directory, "Data", "Training_Images", "Valid")
 
@@ -19,8 +19,8 @@ def evaluate_dice_value_():
     dice_labels = []
 
     # load YOLO
-    weights = os.path.join(dice_value_weights_cfg, "yolov4-custom_85.81.weights")
-    cfg = os.path.join(dice_value_weights_cfg, "dice_value_yolov4.cfg")
+    weights = os.path.join(value_dir, "value_85.81.weights")
+    cfg = os.path.join(value_dir, "dice_value_yolov4.cfg")
     net = cv2.dnn.readNet(weights, cfg)
     labels = ["One", "Two", "Three", "Four", "Five", "Six"]
     layer_names = net.getLayerNames()

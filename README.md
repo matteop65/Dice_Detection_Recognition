@@ -26,7 +26,9 @@ This can be easily be expanded, just needs lots of training for the verious scen
 Please feel free to add any images to the training datasets (can be found in Data/Training_Images). 
 
 ## Running
-before you start make sure you install the requirements. At the moment only opencv and numpy are required, but more may be added in the future. To do so, make sure you have pip installed and run the following command in a virtual environment - in the main directory: 
+before you start make sure you install the requirements. At the moment only opencv and numpy are the only required non-standard modules, so requirements.txt is not really necessary, but more may be added in the future, in which case this file can be updated. 
+
+To install the requirements.txt, make sure you have pip installed and run the following command in a virtual environment - in the main directory: 
 
     > pip3 install -r requirements.txt
 
@@ -34,6 +36,8 @@ Point your camera to the dice (or where they will be thrown), run:
 
     > python3 ./main.py
 and then it should do the rest automatically. 
+
+When running in termal ^C is exit command. 
 
 I have not tested whether the software works with python 2.x.
 

@@ -47,7 +47,7 @@ def motion():
         for contour in cnts:
             if cv2.contourArea(contour) > 800:
                 rolled = 1
-                print("rolling..." + "\n")
+                print("rolling...")
                 break
         break
 
@@ -103,6 +103,7 @@ if __name__ == "__main__":
                 else:
                     break
             print("________________________________")
+            print("\n")
             for i in range(len(dice_labels)):
                 print(dice_labels[i])
             print("________________________________")

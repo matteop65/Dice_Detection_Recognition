@@ -14,13 +14,14 @@ camera_inputs = os.path.join(detection_folder, "Camera_Inputs")
 annotated_images = os.path.join(data, "Annotated_Images")
 temporary_images = os.path.join(detection_folder, "Temporary_Images")
 trained_yolo = os.path.join(main_directory, "Trained_YOLO")
+detect = os.path.join(trained_yolo, "Dice_detect")
 # print(os.path.dirname(os.path.realpath(__file__)))
 
 
 def detect_dice():
     # load YOLO
-    weights = os.path.join(trained_yolo, "yolov4-custom.weights")
-    cfg = os.path.join(trained_yolo, "custom-yolov4-detector.cfg")
+    weights = os.path.join(detect, "yolov4-detector.weights")
+    cfg = os.path.join(detect, "yolov4-detector.cfg")
     net = cv2.dnn.readNet(weights, cfg)
     labels = ["Dice", "Dice Face"]
     layer_names = net.getLayerNames()
