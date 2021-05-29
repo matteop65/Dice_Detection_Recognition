@@ -48,7 +48,7 @@ I have not tested whether the software works with python 2.x.
 
  I suggest using labelImg (https://github.com/tzutalin/labelImg)- just make sure to delete the classes that come with the software. Other alternatives include using VoTT and then running the results through a conversion to get them into txt format. 
 
- To train the dataset I used Google Colab. I have provided the Notebook called (...). Make sure that you set it up with drive, that way if anything goes wrong there is a backup. For any additional information consults the README.md in the Training Folder. 
+ To train the dataset I used Google Colab. I have provided the Notebook called (Custom_YOLOv4_Trainer.ipynb). Make sure that you set it up with Google drive, that way if any errors occur during training backups are kept. Google Colab sets backups every 100 and 1000 iterations as well as keeping the best value (only does this if you asked it calculate the mAP). For any additional information consults the README.md in the Training Folder. 
 
 
  
