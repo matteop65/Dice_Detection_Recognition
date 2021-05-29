@@ -46,7 +46,7 @@ I have not tested whether the software works with python 2.x.
 
  All images in the Train and Valid folders should be labelled in Darknet YOLO format, i.e. a txt that contains the class number, initial position (x and y) and width and height of the labelled bounding boxes. 
 
- I suggest using labelImg (Link HERE)- just make sure to delete the classes that come with the software. Other alternatives include using VoTT and then running the results through a conversion to get them into txt format. 
+ I suggest using labelImg (https://github.com/tzutalin/labelImg)- just make sure to delete the classes that come with the software. Other alternatives include using VoTT and then running the results through a conversion to get them into txt format. 
 
  To train the dataset I used Google Colab. I have provided the Notebook called (...). Make sure that you set it up with drive, that way if anything goes wrong there is a backup. For any additional information consults the README.md in the Training Folder. 
 
