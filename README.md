@@ -1,7 +1,7 @@
 # Dice_Detection_Recognition
  Version 1.0
 
- This repo contains the code required to run a dice recognition software and also train the machine learning algorithms.
+ This repo contains the code required to run a dice recognition software and also train the object detection, machine learning model.
 
  2 YOLO (You Only Look Once) algorithms were trained based on Darknet:
 
